@@ -1,171 +1,338 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name='viewport' content='width=device-width, initial-scale=1'/>
-  <title>ABDENNOUR </title>
-  <meta name="description" content="صفحة شخصية بسيطة مع روابط مواقع التواصل الاجتماعي" />
-  <style>
-    :root{
-      --bg: #0f1220;
-      --card: #151933;
-      --text: #eef2ff;
-      --muted: #9aa3b2;
-      --accent: #6c8cff;
-      --ring: rgba(108,140,255,.35);
-      --btn: #1b2147;
-      --btn-hover: #222a59;
-      --shadow: 0 10px 30px rgba(0,0,0,.25), 0 6px 12px rgba(20,30,60,.25);
-    }
-    .light{
-      --bg: #f6f7fb;
-      --card: #ffffff;
-      --text: #0f1220;
-      --muted: #5c667a;
-      --accent: #3b5bfd;
-      --ring: rgba(59,91,253,.25);
-      --btn: #eef1ff;
-      --btn-hover: #e2e7ff;
-      --shadow: 0 8px 24px rgba(15,18,32,.08), 0 2px 6px rgba(15,18,32,.06);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Kufi Arabic", "Noto Sans Arabic", "Almarai", sans-serif;
-      background: radial-gradient(1200px 800px at 80% -10%, rgba(108,140,255,.18), transparent 40%),
-                  radial-gradient(900px 700px at -10% 110%, rgba(108,140,255,.18), transparent 40%),
-                  var(--bg);
-      color: var(--text);
-      display:flex;align-items:center;justify-content:center;
-      padding: 32px 16px;
-      transition: background .3s, color .3s;
-    }
-    .container{width:min(980px,96vw)}
-    .card{
-      background: linear-gradient(180deg, color-mix(in oklab, var(--card) 92%, #000 8%), var(--card));
-      border: 1px solid color-mix(in oklab, var(--card) 80%, transparent);
-      box-shadow: var(--shadow);
-      border-radius: 16px;
-      padding: 22px;
-      position:relative;
-      overflow:hidden;
-      backdrop-filter: blur(6px);
-      transition: background .3s, border .3s, box-shadow .3s;
-    }
-    .header{display:flex;gap:16px;align-items:center}
-    .avatar{width:88px;height:88px;border-radius:16px;background:linear-gradient(135deg,#6d7cff,#8fb0ff);border:2px solid var(--ring);overflow:hidden}
-    .title{display:flex;flex-direction:column}
-    h1{font-size:20px;margin:0}
-    .subtitle{color:var(--muted);font-size:13px}
-    .about{color:var(--muted);margin-top:12px;line-height:1.6}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aznor_31 | المنصة الرسمية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* تخصيص شريط التمرير */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #ff2222; border-radius: 10px; }
 
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
-    @media (max-width:600px){.grid{grid-template-columns:1fr}}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
 
-    .social-btn{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:var(--btn);text-decoration:none;color:var(--text);border:1px solid transparent;transition:transform .15s ease,box-shadow .15s ease}
-    .social-btn:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.25);border-color:var(--ring)}
-    .social-icon{width:28px;height:28px;flex:none}
-    .social-label{font-weight:700}
-    .social-hint{margin-right:auto;color:var(--muted);font-size:13px}
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    .footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;color:var(--muted);font-size:13px}
+        /* خلفية ضوئية نيونية نابضة خلف الكرت الرئيسي */
+        .bg-glow {
+            position: absolute;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(255, 34, 34, 0.15) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+            animation: pulseGlow 6s infinite alternate ease-in-out;
+        }
 
-    /* زر ON/OFF */
-    .toggle-btn{
-      padding: 8px 16px;
-      border-radius: 20px;
-      border: none;
-      background: var(--accent);
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform .2s;
-    }
-    .toggle-btn:hover{transform: scale(1.05);}
-  </style>
+        @keyframes pulseGlow {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+        }
+
+        /* الكرت الرئيسي المتجاوب مع الهواتف والشاشات */
+        .profile-card {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(12, 12, 12, 0.8);
+            border: 1px solid rgba(255, 34, 34, 0.25);
+            border-radius: 32px;
+            padding: 45px 25px 35px 25px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 40px rgba(255, 34, 34, 0.05);
+            text-align: center;
+            z-index: 1;
+            position: relative;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* محاكاة اللوغو الخاص بك بدقة عالية */
+        .logo-wrapper {
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-star {
+            color: #ff2222;
+            font-size: 1.6rem;
+            text-shadow: 0 0 12px #ff2222, 0 0 25px #ff0000;
+            animation: pulseStar 2s infinite alternate linear;
+            margin-bottom: -5px;
+        }
+
+        @keyframes pulseStar {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.15); opacity: 1; }
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', 'Cairo', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #ff2222;
+            font-style: italic;
+            text-shadow: 0 0 10px #ff2222, 0 0 25px #ff0000, 0 0 50px rgba(255,0,0,0.4);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        /* الخط المنحني أسفل الإسم تماماً مثل صورتك */
+        .logo-curve {
+            width: 90%;
+            height: 4px;
+            background: #ff2222;
+            margin: 6px auto 0 auto;
+            border-radius: 50%;
+            box-shadow: 0 3px 12px #ff2222;
+        }
+
+        /* الوصف الصغير (Bio) */
+        .bio-text {
+            font-size: 0.95rem;
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 400;
+            padding: 0 10px;
+        }
+
+        /* عنوان قسم الخدمات المميزة */
+        .services-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #777;
+            margin-bottom: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .services-title::before, .services-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* شبكة الخدمات المحدثة بخدمتين فقط */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .service-item {
+            background: rgba(255, 34, 34, 0.03);
+            border: 1px solid rgba(255, 34, 34, 0.15);
+            border-radius: 16px;
+            padding: 18px 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .service-item i {
+            font-size: 1.5rem;
+            color: #ff2222;
+            filter: drop-shadow(0 0 6px rgba(255, 34, 34, 0.6));
+        }
+
+        .service-item:hover {
+            background: rgba(255, 34, 34, 0.1);
+            border-color: #ff2222;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(255, 34, 34, 0.15);
+            color: #ffffff;
+        }
+
+        /* حاوية أزرار السوشيال ميديا */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* الأزرار الديناميكية المرتفعة بتأثير توهج قوي */
+        .dynamic-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 25px;
+            background: #111111;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 50px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .button-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .dynamic-button i.main-icon {
+            font-size: 1.4rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dynamic-button .chevron-icon {
+            font-size: 0.8rem;
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+
+        /* تأثير الحركة والديناميكية المرتفعة جداً عند التمرير بالماوس */
+        .dynamic-button:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: #ff2222;
+            color: #050505;
+            border-color: #ff2222;
+            box-shadow: 0 15px 30px rgba(255, 34, 34, 0.4), 0 0 20px rgba(255, 34, 34, 0.2);
+            font-weight: 800;
+        }
+
+        .dynamic-button:hover i.main-icon {
+            transform: scale(1.25) rotate(-8deg);
+        }
+
+        .dynamic-button:hover .chevron-icon {
+            opacity: 1;
+            transform: translateX(-5px);
+            color: #050505;
+        }
+
+        /* أسفل الصفحة */
+        .footer-badge {
+            margin-top: 35px;
+            font-size: 0.75rem;
+            color: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        .footer-badge i {
+            color: #ff2222;
+            animation: pulseHeart 1s infinite alternate;
+        }
+
+        @keyframes pulseHeart {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-  <main class="container">
-    <section class="card">
-      <div class="header">
-        <div class="avatar" aria-hidden="true">
-  <img src="1234.jpg" alt="Logo" style="width:100%;height:100%;border-radius:16px;object-fit:cover;">
-</div>
 
-        <div class="title">
-          <h1>ABDENNOUR </h1>
-          <div class="subtitle">محتوى ووسائط — الجزائر</div>
+    <div class="bg-glow"></div>
+
+    <div class="profile-card">
+        <div class="logo-wrapper">
+            <div class="logo-star">✦</div>
+            <div class="logo-text">aznor_31</div>
+            <div class="logo-curve"></div>
         </div>
-      </div>
 
-      <p class="about">اهلا بك في موقعي يسعدني تواجدك هنا  يمكنك التواصل معي عبر روابط الموجودة في الاسفل </p>
+        <p class="bio-text">
+            محرر مرئي وصانع محتوى إبداعي. أساعدك في تحويل أفكارك ولقطاتك العادية إلى روائع بصرية سينمائية تجذب الانتباه وتنتشر بسرعة!
+        </p>
 
-      <div class="grid" aria-label="روابط مواقع التواصل">
+        <div class="services-title">الخدمات</div>
+        <div class="services-grid">
+            <div class="service-item">
+                <i class="fa-solid fa-clapperboard"></i>
+                <span>مونتاج فيديوهات</span>
+            </div>
+            <div class="service-item">
+                <i class="fa-solid fa-rectangle-ad"></i>
+                <span>نشر إعلانات</span>
+            </div>
+        </div>
 
-        <!-- Instagram -->
-        <a class="social-btn" href="https://www.instagram.com/abdnor313" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.51 5.51 0 0 1 12 7.5zM18 6.2a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.2z"/></svg>
-          <span class="social-label">Instagram</span>
-          <span class="social-hint">@abdnor313</span>
-        </a>
+        <div class="links-container">
+            <a href="https://youtube.com/@aznor_31?si=pNPqAR7ktKpGDXOs" target="_blank" class="dynamic-button">
+                <div class="button-content">
+                    <i class="fa-brands fa-youtube main-icon"></i>
+                    <span>يوتيوب / YouTube</span>
+                </div>
+                <i class="fa-solid fa-chevron-left chevron-icon"></i>
+            </a>
 
-        <!-- Facebook -->
-        <a class="social-btn" href="https://www.facebook.com/share/1ZkR4rzUtY/" target="_blank" rel="noopener" aria-label="Facebook">
-          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h2v7h3v-7h2.3l.7-3H13V9z"/></svg>
-          <span class="social-label">Facebook</span>
-          <span class="social-hint">ABDNOR ABDNOR</span>
-        </a>
+            <a href="https://www.tiktok.com/@aznor_31?_r=1&_t=ZS-987fTHoSRJg" target="_blank" class="dynamic-button">
+                <div class="button-content">
+                    <i class="fa-brands fa-tiktok main-icon"></i>
+                    <span>تيك توك / TikTok</span>
+                </div>
+                <i class="fa-solid fa-chevron-left chevron-icon"></i>
+            </a>
 
-        <!-- TikTok -->
-        <a class="social-btn" href="https://www.tiktok.com/@luux_603?_r=1&_t=ZS-91U1BrpYjq5" target="_blank" rel="noopener" aria-label="TikTok">
-          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.4 2.3 2.1 4.2 4.5 4.6v3a7.9 7.9 0 0 1-4.5-1.4V16a6 6 0 1 1-6-6 6.2 6.2 0 0 1 1.5.2V13a3.2 3.2 0 1 0 2 3V2.8c.9.2 1.9.2 2.5.2z"/></svg>
-          <span class="social-label">TikTok</span>
-          <span class="social-hint">@abd.nor131</span>
-        </a>
+            <a href="https://www.instagram.com/aznor___31?igsh=OHNjdWU1MGpneHRq" target="_blank" class="dynamic-button">
+                <div class="button-content">
+                    <i class="fa-brands fa-instagram main-icon"></i>
+                    <span>انستغرام / Instagram</span>
+                </div>
+                <i class="fa-solid fa-chevron-left chevron-icon"></i>
+            </a>
 
-        <!-- Telegram -->
-        <a class="social-btn" href="https://t.me/abdnor31" target="_blank" rel="noopener" aria-label="Telegram">
-          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3a1 1 0 0 0-1.1-.1L3.3 12.1a1 1 0 0 0 .1 1.9l4.9 1.5 1.7 3.9a1 1 0 0 0 1.7.2l2.4-2.8 4.9 3.6a1 1 0 0 0 1.6-.6l2.3-14a1 1 0 0 0-.9-1.5z"/></svg>
-          <span class="social-label">Telegram</span>
-          <span class="social-hint">ABDNOR</span>
-        </a>
-        <!-- Email -->
-<a class="social-btn" href="" target="_blank" rel="noopener" aria-label="Email">
-  <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M2 4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm2 0v16h16V4H4zm8 9l8-5H4l8 5z"/>
-  </svg>
-  <span class="social-label">Email</span>
-  <span class="social-hint">......@email.com</span>
-</a>
+            <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" class="dynamic-button">
+                <div class="button-content">
+                    <i class="fa-brands fa-whatsapp main-icon"></i>
+                    <span>واتساب / WhatsApp</span>
+                </div>
+                <i class="fa-solid fa-chevron-left chevron-icon"></i>
+            </a>
+        </div>
 
+        <div class="footer-badge">
+            <span>تطوير وإبداع</span>
+            <i class="fa-solid fa-heart"></i>
+            <span>aznor_31 &copy; 2026</span>
+        </div>
+    </div>
 
-
-        <!-- WhatsApp -->
-        <a class="social-btn" href="https://wa.me/213555000000" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 12.1A8 8 0 0 1 8.8 20L4 21.2l1.2-4.6A8 8 0 1 1 20 12.1zM7.7 17l.3.2a6.6 6.6 0 1 0-1.9-1.9l.2.3-.7 2.7L7.7 17zm8-4.1c-.2-.1-1.1-.6-1.3-.7-.2-.1-.4-.1-.6.1s-.7.8-.9.9-.3.2-.6.1a5.3 5.3 0 0 1-1.6-1 6 6 0 0 1-1.1-1.4c-.1-.2 0-.4.1-.6l.4-.5c.1-.1.1-.3 0-.5 0-.1-.5-1.2-.7-1.6-.2-.4-.4-.3-.6-.3H8c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.1 3c.2.2 2 3 4.8 4 .4.2.8.2 1.1.1.3-.1 1-.4 1.2-.9.1-.5.1-.9.1-1 0-.2-.2-.3-.3-.4z"/></svg>
-          <span class="social-label">WhatsApp</span>
-          <span class="social-hint">+213 555 000 000</span>
-        </a>
-
-      </div>
-
-      <div class="footer">
-        <div>© <span id="year"></span> — ABDENNOUR </div>
-        <button class="toggle-btn" id="themeToggle">نهار / ليل</button>
-      </div>
-
-    </section>
-  </main>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    const btn = document.getElementById('themeToggle');
-    btn.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-      btn.textContent = document.body.classList.contains('light') ? 'نهار' : 'ليل';
-    });
-  </script>
 </body>
 </html>
